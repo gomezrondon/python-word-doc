@@ -1,6 +1,9 @@
 import os
 import pyautogui
 import time
+import psutil
+
+from get_list_process import isWoducmentOpen
 
 def openFile():
     try:
@@ -24,5 +27,8 @@ def closeFile():
         print(str(e))
 
 if __name__ == '__main__':
-    openFile()
-    # closeFile()
+    print(isWoducmentOpen())
+    if isWoducmentOpen() == True:
+        closeFile()
+    else:
+        openFile()
