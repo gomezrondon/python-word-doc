@@ -1,8 +1,6 @@
 import os
 import pyautogui
 import time
-import psutil
-
 from get_list_process import isWoducmentOpen
 
 def openFile():
@@ -19,6 +17,9 @@ def openFile():
         print(str(e))
 
 
+def isOpen():
+    return isWoducmentOpen()
+
 def closeFile():
     try:
         os.system('TASKKILL /F /IM soffice.bin') #is libreOffice.exe
@@ -26,9 +27,12 @@ def closeFile():
     except Exception as e:
         print(str(e))
 
-if __name__ == '__main__':
+def ifOpenThenClose():
     print(isWoducmentOpen())
     if isWoducmentOpen() == True:
         closeFile()
     else:
         openFile()
+
+if __name__ == '__main__':
+    ifOpenThenClose()
