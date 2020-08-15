@@ -9,9 +9,12 @@ if __name__ == '__main__':
      text = paragraphs[1].text
      paragraphs[1]._p.clear()
 
-     paragraphs[1].add_run(str(datetime.datetime.now())+' tag ---------------------> \n')
+     paragraphs[1].add_run('---------------------> '+str(datetime.datetime.now().today().strftime('%Y-%m-%d  time: %H:%M:%S'))+' \n')
      paragraphs[1].add_run('\n')
      paragraphs[1].add_run(' Nueva entrada de texto!! \n')
+     paragraphs[1].add_run('\n')
+     paragraphs[1].add_run('\n')
+     paragraphs[1].add_run('\n')
      paragraphs[1].add_run('\n')
      #paragraphs[1].add_run('-----------------------------------< \n')
      paragraphs[1].add_run(text)
