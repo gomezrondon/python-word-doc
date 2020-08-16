@@ -5,13 +5,13 @@ from open_close_program import ifOpenThenClose, isOpen, findWindowProgram, click
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-     filePath = r'C:\Users\jrgm\Documents\GAA\F603.docx'
-     proc_name = 'WINWORD.EXE'
-     if isOpen(proc_name) == True:
-          docx = 'F603.docx'
-          x, y = findWindowProgram(docx)
+     filePath = r'<DOCUMENT PATH>'
+     docName = '<DOCUMENT NAME>'
+
+     if isOpen(docName) == True:
+          x, y = findWindowProgram(docName)
           clickAndSave(x, y)
-          ifOpenThenClose(filePath,proc_name)
+          ifOpenThenClose(filePath, docName)
           time.sleep(1)
 
 
@@ -31,5 +31,5 @@ if __name__ == '__main__':
      paragraphs[0].add_run(text)
      doc.save(filePath)
 
-     if isOpen(proc_name) == False:
-          ifOpenThenClose(filePath,proc_name)
+     if isOpen(docName) == False:
+          ifOpenThenClose(filePath,docName)

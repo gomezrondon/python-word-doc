@@ -1,7 +1,6 @@
 import os
 import pyautogui
-import time
-from get_list_process import isWoducmentOpen
+
 
 def findWindowProgram(docx):
     programs = pyautogui.getAllWindows()
@@ -15,31 +14,28 @@ def findWindowProgram(docx):
 def openFile(filePath):
     try:
         os.startfile(filePath)
-        # time.sleep(4)
-        # pyautogui.click(1027, 699)
-        # time.sleep(1)
-        # pyautogui.click(1027, 699)
-        # time.sleep(2)
-        # print(pyautogui.position()) #Point(x=1027, y=699)
-
     except Exception as e:
         print(str(e))
 
 
-def isOpen(proc_name):
-    return isWoducmentOpen(proc_name)
+def isOpen(docName):
+    x, y = findWindowProgram(docName)
+    if x > -1 and y > -1:
+        return True
+    else:
+        return False
 
-def closeFile(proc_name):
-    try:
-        os.system('TASKKILL /F /IM '+proc_name) #is libreOffice.exe
+def closeFile(docName):
+    x, y = findWindowProgram(docName)
+    pyautogui.click(x, y)
+    clickAndSave(x, y)
+    pyautogui.hotkey('ctrl', 'F4')
 
-    except Exception as e:
-        print(str(e))
 
-def ifOpenThenClose(filePath, proc_name):
-    print(isWoducmentOpen(proc_name))
-    if isWoducmentOpen(proc_name) == True:
-        closeFile(proc_name)
+def ifOpenThenClose(filePath, docName):
+    print(isOpen(docName))
+    if isOpen(docName) == True:
+        closeFile(docName)
     else:
         openFile(filePath)
 
@@ -51,4 +47,6 @@ def clickAndSave(x, y):
 
 
 if __name__ == '__main__':
-    ifOpenThenClose('filepath')
+    filePath = r'C:\Users\jrgm\Documents\GAA\F603.docx'
+    docName = 'F603.docx'
+    ifOpenThenClose(filePath, docName)
