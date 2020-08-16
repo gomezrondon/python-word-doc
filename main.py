@@ -14,8 +14,9 @@ def getConfig(f_path):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-     filePath = r'<DOCUMENT PATH>'
-     docName = '<DOCUMENT NAME>'
+     config = getConfig('config.txt')
+     filePath = config[0]
+     docName = config[1]
 
      if isOpen(docName) == True:
           x, y = findWindowProgram(docName)
