@@ -3,6 +3,15 @@ import datetime
 import time
 from open_close_program import ifOpenThenClose, isOpen, findWindowProgram, clickAndSave
 
+
+def getConfig(f_path):
+     config = []
+     with open(f_path, "rt") as t_file:
+          for each in t_file:
+               config.append(each.replace("\n",""))
+     return config
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
      filePath = r'<DOCUMENT PATH>'
