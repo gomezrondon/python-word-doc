@@ -1,15 +1,21 @@
 import docx  #hay que usar es python-docx y se invoca con docx
 import datetime
 import time
-from open_close_program import ifOpenThenClose, isOpen
+from open_close_program import ifOpenThenClose, isOpen, findWindowProgram, clickAndSave
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-     if isOpen() == True:
-          ifOpenThenClose()
+     filePath = r'C:\Users\jrgm\Documents\GAA\F603.docx'
+     proc_name = 'WINWORD.EXE'
+     if isOpen(proc_name) == True:
+          docx = 'F603.docx'
+          x, y = findWindowProgram(docx)
+          clickAndSave(x, y)
+          ifOpenThenClose(filePath,proc_name)
           time.sleep(1)
 
-     doc = docx.Document('D:\gomez\Documents\python-doc.docx')
+
+     doc = docx.Document(filePath)
      paragraphs  = doc.paragraphs
      text = paragraphs[0].text
      paragraphs[0]._p.clear()
@@ -23,7 +29,7 @@ if __name__ == '__main__':
      paragraphs[0].add_run('\n')
      #paragraphs[1].add_run('-----------------------------------< \n')
      paragraphs[0].add_run(text)
-     doc.save('D:\gomez\Documents\python-doc.docx')
+     doc.save(filePath)
 
-     if isOpen() == False:
-          ifOpenThenClose()
+     if isOpen(proc_name) == False:
+          ifOpenThenClose(filePath,proc_name)
