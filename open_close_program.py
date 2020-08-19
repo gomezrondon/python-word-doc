@@ -2,13 +2,21 @@ import os
 import pyautogui
 
 
-def findWindowProgram(docx):
-    programs = pyautogui.getAllWindows()
+def findWindowProgram(title):
+    programs = pyautogui.getWindowsWithTitle(title)
     for prog in programs:
-        if docx in prog.title:
-            print(prog.title)
-            return (prog.left + 200 ) , (prog.top + 20 )
-    return -1, -1
+        print(prog.title)
+        prog.restore()
+        prog.activate()
+        return prog
+
+# def findWindowProgram(docx):
+#     programs = pyautogui.getAllWindows()
+#     for prog in programs:
+#         if docx in prog.title:
+#             print(prog.title)
+#             return (prog.left + 200 ) , (prog.top + 20 )
+#     return -1, -1
 
 
 def openFile(filePath):
@@ -18,35 +26,37 @@ def openFile(filePath):
         print(str(e))
 
 
-def isOpen(docName):
-    x, y = findWindowProgram(docName)
-    if x > -1 and y > -1:
-        return True
-    else:
+def isOpen(title):
+    program = findWindowProgram(title)
+    if program == None:
         return False
+    else:
+        return True
 
-def closeFile(docName):
-    x, y = findWindowProgram(docName)
-    pyautogui.click(x, y)
-    clickAndSave(x, y)
-    pyautogui.hotkey('ctrl', 'F4')
+def closeFile(title):
+    program = clickAndSave(title)
+    program.close()
 
-
-def ifOpenThenClose(filePath, docName):
-    print(isOpen(docName))
-    if isOpen(docName) == True:
-        closeFile(docName)
+def ifOpenThenClose(filePath, title):
+    # print(isOpen(title))
+    if isOpen(title) == True:
+        closeFile(title)
     else:
         openFile(filePath)
 
 
-def clickAndSave(x, y):
-    pyautogui.moveTo(x, y)
-    pyautogui.click(x, y)
+def clickAndSave(title):
+    program = findWindowProgram(title)
     pyautogui.hotkey('ctrl', 's')
+    return program
+
 
 
 if __name__ == '__main__':
-    filePath = r'C:\Users\jrgm\Documents\GAA\F603.docx'
-    docName = 'F603.docx'
-    ifOpenThenClose(filePath, docName)
+    title = 'F603.docx'+' - Word'
+    closeFile(title)
+    # clickAndSave(title)
+    # activateWindow('F603.docx'+' - Word')
+    # filePath = r'C:\Users\jrgm\Documents\GAA\F603.docx'
+    # docName = 'F603.docx'
+    # ifOpenThenClose(filePath, docName)

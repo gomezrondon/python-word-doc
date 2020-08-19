@@ -14,14 +14,15 @@ def getConfig(f_path):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+     title = 'F603.docx' + ' - Word'
      config = getConfig('config.txt')
      filePath = config[0]
      docName = config[1]
 
-     if isOpen(docName) == True:
-          x, y = findWindowProgram(docName)
-          clickAndSave(x, y)
-          ifOpenThenClose(filePath, docName)
+     if isOpen(title) == True:
+          x, y = findWindowProgram(title)
+          clickAndSave(title)
+          ifOpenThenClose(filePath, title)
           time.sleep(1)
 
 
@@ -41,5 +42,5 @@ if __name__ == '__main__':
      paragraphs[0].add_run(text)
      doc.save(filePath)
 
-     if isOpen(docName) == False:
-          ifOpenThenClose(filePath,docName)
+     if isOpen(title) == False:
+          ifOpenThenClose(filePath,title)
