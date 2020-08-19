@@ -20,7 +20,7 @@ if __name__ == '__main__':
      docName = config[1]
 
      if isOpen(title) == True:
-          x, y = findWindowProgram(title)
+          findWindowProgram(title)
           clickAndSave(title)
           ifOpenThenClose(filePath, title)
           time.sleep(1)
